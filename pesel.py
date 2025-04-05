@@ -28,10 +28,18 @@ def verify_pesel(pesel: str) -> int:
     Returns:
         int: 1 jeśli numer jest poprawny, 0 jeśli nie.
     """
-    ### TUTAJ PODAJ ROZWIĄZANIE ZADANIA
+    weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
+    sum_products = 0
 
-    ### return 0 - powinno być zmienione i zwrócić prawdziwy wynik (zgodny z oczekiwaniami)
-    return 0
+    for i in range(10):
+        sum_products += int(pesel[i]) * weights[i]
+
+    check_digit = (10 - (sum_products % 10)) % 10
+
+    if check_digit == int(pesel[10]):
+        return 1
+    else:
+        return 0
 
 
 # Przykładowe wywołanie:
