@@ -33,6 +33,7 @@ Wymagania:
 - Dla każdego zapytania, zwrócenie posortowanej listy indeksów dokumentów.
 """
 
+import string
 
 def index_documents(documents: list[str], queries: list[str]) -> list[list[int]]:
     """
@@ -47,10 +48,33 @@ def index_documents(documents: list[str], queries: list[str]) -> list[list[int]]
     Returns:
         list[list[int]]: Lista wyników dla kolejnych zapytań.
     """
-    ### TUTAJ PODAJ ROZWIĄZANIE ZADANIA
 
-    ### return [[]] - powinno być zmienione i zwrócić prawdziwy wynik (zgodny z oczekiwaniami)
-    return [[]]
+
+    processed_docs = []
+    for doc in documents:
+        doc = doc.lower()
+        doc = doc.translate(str.maketrans('', '', string.punctuation))
+
+        words = doc.split()
+        processed_docs.append(words)
+
+    results = []
+
+    for query in queries:
+        query = query.lower()
+
+        doc_counts = []
+        for i, doc_words in enumerate(processed_docs):
+            count = doc_words.count(query)
+            if count > 0:
+                doc_counts.append((i, count))
+
+        doc_counts.sort(key=lambda x: -x[1])
+
+        query_result = [doc_idx for doc_idx, _ in doc_counts]
+        results.append(query_result)
+
+    return results
 
 
 # Przykładowe wywołanie:
