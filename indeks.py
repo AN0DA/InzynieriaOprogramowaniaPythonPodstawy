@@ -35,6 +35,7 @@ Wymagania:
 
 import string
 
+
 def index_documents(documents: list[str], queries: list[str]) -> list[list[int]]:
     """
     Przetwarza dokumenty i zapytania, zwracając listy indeksów dokumentów,
@@ -48,7 +49,6 @@ def index_documents(documents: list[str], queries: list[str]) -> list[list[int]]
     Returns:
         list[list[int]]: Lista wyników dla kolejnych zapytań.
     """
-
 
     processed_docs = []
     for doc in documents:
